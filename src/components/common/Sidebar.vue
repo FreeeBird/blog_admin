@@ -8,6 +8,7 @@
             text-color="#bfcbd9"
             active-text-color="#20a0ff"
             unique-opened
+            collapse-transition
             router
         >
             <template v-for="item in items">
@@ -60,6 +61,46 @@ export default {
                     icon: 'el-icon-lx-home',
                     index: 'dashboard',
                     title: '系统首页'
+                },
+                {
+                    icon: 'el-icon-lx-home',
+                    index: 'post',
+                    title: '发表文章'
+                },
+                {
+                    icon: 'el-icon-lx-home',
+                    index: 'article',
+                    title: '文章管理',
+                },
+                {
+                    icon: 'el-icon-lx-home',
+                    index: 'category',
+                    title: '分类管理',
+                },
+                {
+                    icon: 'el-icon-lx-home',
+                    index: 'introduction',
+                    title: '博客信息设置',
+                },
+                {
+                    icon: 'el-icon-lx-home',
+                    index: 'blogger',
+                    title: '博主信息管理',
+                },
+                {
+                    icon: 'el-icon-lx-home',
+                    index: 'guest',
+                    title: '访客管理',
+                },
+                {
+                    icon: 'el-icon-lx-home',
+                    index: 'comment',
+                    title: '评论管理',
+                },
+                {
+                    icon: 'el-icon-lx-home',
+                    index: 'message',
+                    title: '留言管理',
                 },
                 {
                     icon: 'el-icon-lx-cascades',
@@ -155,6 +196,7 @@ export default {
     },
     computed: {
         onRoutes() {
+            this.$message(this.$route.path.replace('/', ''))
             return this.$route.path.replace('/', '');
         }
     },
