@@ -6,21 +6,11 @@
   <a href="https://github.com/ElemeFE/element">
     <img src="https://img.shields.io/badge/element--ui-2.8.2-brightgreen.svg" alt="element-ui">
   </a>
-  <a href="https://github.com/lin-xin/vue-manage-system/blob/master/LICENSE">
-    <img src="https://img.shields.io/github/license/mashape/apistatus.svg" alt="license">
-  </a>
-  <a href="https://github.com/lin-xin/vue-manage-system/releases">
-    <img src="https://img.shields.io/github/release/lin-xin/vue-manage-system.svg" alt="GitHub release">
-  </a>
-  <a href="https://lin-xin.gitee.io/example/work/#/donate">
-    <img src="https://img.shields.io/badge/%24-donate-ff69b4.svg" alt="donate">
-  </a>
+
 
 The web management system solution based on Vue2 and Element-UI。[live demo](https://lin-xin.gitee.io/example/work/)
 
-## Donation
 
-![WeChat](https://lin-xin.gitee.io/images/weixin.jpg)
 
 ## Preface
 
@@ -193,4 +183,3 @@ Finally,enter 'src/components/common/Sidebar.vue' and find el-menu Tags,delete '
 
 ## License
 
-[MIT](https://github.com/lin-xin/vue-manage-system/blob/master/LICENSE)
