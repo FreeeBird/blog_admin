@@ -64,8 +64,8 @@ export default {
                 },
                 {
                     icon: 'el-icon-lx-home',
-                    index: 'post',
-                    title: '发表文章'
+                    index: 'publish',
+                    title: '发表文章',
                 },
                 {
                     icon: 'el-icon-lx-home',

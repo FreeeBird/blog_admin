@@ -19,6 +19,12 @@ const routeMap = [
                 meta: { title: '系统首页' }
             },
             {
+                // 发表
+                path: '/publish',
+                component: () => import(/* webpackChunkName: "editor" */ '../components/page/article/PublichArticle'),
+                meta: { title: '发表文章' }
+            },
+            {
                 path: '/icon',
                 component: () => import(/* webpackChunkName: "icon" */ '../components/page/Icon.vue'),
                 meta: { title: '自定义图标' }
@@ -37,18 +43,6 @@ const routeMap = [
                 path: '/form',
                 component: () => import(/* webpackChunkName: "form" */ '../components/page/BaseForm.vue'),
                 meta: { title: '基本表单' }
-            },
-            {
-                // 富文本编辑器组件
-                path: '/editor',
-                component: () => import(/* webpackChunkName: "editor" */ '../components/page/VueEditor.vue'),
-                meta: { title: '富文本编辑器' }
-            },
-            {
-                // markdown组件
-                path: '/markdown',
-                component: () => import(/* webpackChunkName: "markdown" */ '../components/page/Markdown.vue'),
-                meta: { title: 'markdown编辑器' }
             },
             {
                 // 图片上传组件
