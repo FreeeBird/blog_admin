@@ -49,6 +49,11 @@ const routeMap = [
                 meta: { title: '博客信息'}
             },
             {
+                path: '/blogger',
+                component: () => import('../components/page/blogger/Blogger'),
+                meta: { title: '博客信息'}
+            },
+            {
                 path: '/icon',
                 component: () => import(/* webpackChunkName: "icon" */ '../components/page/Icon.vue'),
                 meta: { title: '自定义图标' }
