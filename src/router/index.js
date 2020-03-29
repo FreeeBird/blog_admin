@@ -39,6 +39,16 @@ const routeMap = [
                 meta: { title: '分类管理'}
             },
             {
+                path: '/message',
+                component: () => import('../components/page/message/Message'),
+                meta: { title: '留言管理'}
+            },
+            {
+                path: '/blogInfo',
+                component: () => import('../components/page/blogInfo/BlogInfo'),
+                meta: { title: '博客信息'}
+            },
+            {
                 path: '/icon',
                 component: () => import(/* webpackChunkName: "icon" */ '../components/page/Icon.vue'),
                 meta: { title: '自定义图标' }

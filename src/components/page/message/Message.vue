@@ -3,7 +3,7 @@
         <div class="crumbs">
             <el-breadcrumb separator="/">
                 <el-breadcrumb-item>
-                    <i class="el-icon-lx-cascades"></i> 分类管理
+                    <i class="el-icon-lx-cascades"></i> 留言管理
                 </el-breadcrumb-item>
             </el-breadcrumb>
         </div>
@@ -27,9 +27,14 @@
             >
                 <el-table-column type="selection" width="55" align="center"></el-table-column>
                 <el-table-column prop="id" label="ID" width="55" align="center"></el-table-column>
-                <el-table-column prop="name" label="分类名称"></el-table-column>
-                <el-table-column prop="count" label="文章数量"></el-table-column>
-
+                <el-table-column prop="nickname" label="昵称"></el-table-column>
+                <el-table-column prop="email" label="邮箱"></el-table-column>
+                <el-table-column prop="content" label="内容"></el-table-column>
+                <el-table-column label="时间">
+                    <template slot-scope="scope">
+                        {{ scope.row.createTime | dateFmt('YYYY/MM/DD HH:mm:SS')}}
+                    </template>
+                </el-table-column>
                 <el-table-column label="操作" width="180" align="center">
                     <template slot-scope="scope">
                         <el-button
@@ -75,8 +80,9 @@
 
 <script>
 import { fetchCategories } from '../../../api/category';
+import { fetchMessages } from '../../../api/message';
 export default {
-    name: 'categories',
+    name: 'message',
     data() {
         return {
             query: {
@@ -99,7 +105,7 @@ export default {
     methods: {
         // 获取 easy-mock 的模拟数据
         getData() {
-            fetchCategories().then(res => {
+            fetchMessages(this.query.pageIndex-1,this.query.pageSize).then(res => {
                 const data = res.data
                 this.tableData = data.content;
                 this.pageTotal = data.totalElements;

@@ -20,6 +20,7 @@
             <el-table
                 :data="tableData"
                 border
+                stripe
                 class="table"
                 ref="multipleTable"
                 header-cell-class-name="table-header"
@@ -133,7 +134,7 @@ export default {
             fetchArticles(this.query.pageIndex-1,this.query.pageSize).then(res => {
                 const data = res.data
                 this.tableData = data.content
-                this.pageTotal = data.totalPages
+                this.pageTotal = data.totalElements
             });
         },
         // 触发搜索按钮

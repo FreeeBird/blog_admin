@@ -99,7 +99,7 @@ export default {
                 },
                 {
                     icon: 'el-icon-coin',
-                    index: 'introduction',
+                    index: 'blogInfo',
                     title: '博客信息',
                 },
                 {

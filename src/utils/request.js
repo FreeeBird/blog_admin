@@ -20,15 +20,15 @@ service.defaults.withCredentials = true;
 // response 拦截器
 service.interceptors.response.use(
     response => {
-        const res = response.data
-        if(res.code !== 2000){
-            console.log(res.message)
+        const res = response
+        if(res.status !== 200){
+            vue.prototype.$message.error(res.statusText)
         }
-        return res;
+        return res.data;
     },
     error => {
         console.log('http_err: ' + error) // for debug
-
+        // this.$message.error(error)
         // router.push('/');
         return Promise.reject(error)
     }
