@@ -64,12 +64,12 @@ export default {
                 },
                 {
                     icon: 'el-icon-lx-home',
-                    index: 'publish',
+                    index: 'editor',
                     title: '发表文章',
                 },
                 {
                     icon: 'el-icon-lx-home',
-                    index: 'article',
+                    index: 'articles',
                     title: '文章管理',
                 },
                 {

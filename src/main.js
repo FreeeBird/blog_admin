@@ -9,6 +9,7 @@ import 'element-ui/lib/theme-chalk/index.css'; // 默认主题
 import './assets/css/icon.css';
 import './components/common/directives';
 import 'babel-polyfill';
+import moment from 'moment';
 
 Vue.config.productionTip = false;
 Vue.use(VueI18n);
@@ -20,6 +21,9 @@ const i18n = new VueI18n({
     messages
 });
 
+Vue.filter('dateFmt',(input,formatString = "YYYY-MM-DD")=>{
+    return moment(input).format(formatString)
+})
 
 
 new Vue({

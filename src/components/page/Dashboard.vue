@@ -112,6 +112,7 @@
 <script>
 import Schart from 'vue-schart';
 import bus from '../common/bus';
+import { fetchTest } from '../../api';
 export default {
     name: 'dashboard',
     data() {
@@ -237,7 +238,15 @@ export default {
     //     window.removeEventListener('resize', this.renderChart);
     //     bus.$off('collapse', this.handleBus);
     // },
+    created:function(){
+        this.fetchData()
+    },
     methods: {
+        fetchData(){
+            fetchTest(1).then(res => {
+                console.log(res.data)
+            })
+        },
         changeDate() {
             const now = new Date().getTime();
             this.data.forEach((item, index) => {

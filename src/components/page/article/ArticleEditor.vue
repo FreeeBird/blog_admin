@@ -35,7 +35,7 @@
 
             <el-row>
                 <quill-editor  v-if="article.type===0" ref="myTextEditor" v-model="article.content" :options="editorOption"></quill-editor>
-                <mavon-editor v-else v-model="article.content" ref="md" @imgAdd="$imgAdd" @change="change" style="min-height: 600px"/>
+                <mavon-editor v-else v-model="article.content" ref="md" @imgAdd="$imgAdd" @change="change" placeholder="" style="min-height: 600px"/>
             </el-row>
 
             <el-row>
@@ -58,6 +58,9 @@
     import { quillEditor } from 'vue-quill-editor';
     import { mavonEditor } from 'mavon-editor'
     import 'mavon-editor/dist/css/index.css'
+    import { fetchArticles, publishArticle } from '../../../api/article';
+    import { fetchTest } from '../../../api';
+    import { fetchCategories } from '../../../api/category';
     export default {
         name: 'publish',
         data: function(){
@@ -68,6 +71,9 @@
                 ],
                 select_category: 0,
                 article:{
+                    // createTime: null,
+                    // id: null,
+                    // updateTime: null,
                     thumbnailUrl: "",
                     title: "",
                     summary: "",
@@ -79,7 +85,7 @@
                 },
                 html:'',
                 editorOption: {
-                    // placeholder: 'Hello World'
+                    placeholder: ''
                 }
             }
         },
@@ -87,7 +93,16 @@
             quillEditor,
             mavonEditor
         },
+        created:function() {
+            this.fetchData()
+        },
         methods: {
+            fetchData(){
+                fetchCategories().then(res => {
+                    const re = res.data
+                    this.categories = re.content
+                })
+            },
             onEditorChange({ editor, html, text }) {
                 this.content = html;
             },
@@ -115,9 +130,16 @@
                 this.html = render;
             },
             submit(){
-                console.log(this.content);
-                console.log(this.html);
-                this.$message.success('提交成功！');
+                publishArticle(this.article).then(res =>{
+                    const re = res;
+                    if(re.code===2000){
+                        this.$message.success(re.message)
+                        this.article.content=''
+                        this.article.summary=''
+                        this.article.title=''
+                    }
+
+                })
             }
         }
     }

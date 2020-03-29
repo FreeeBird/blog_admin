@@ -1,34 +1,39 @@
-import axios from 'axios';
+import axios from 'axios'
+// import router from '@/plugins/router'
+import Qs from 'qs'
+import vue from 'vue'
 
+const BASE_API = 'http://localhost:8888/blog/api';
+// 创建axios实例
 const service = axios.create({
-    // process.env.NODE_ENV === 'development' 来判断是否开发环境
-    // easy-mock服务挂了，暂时不使用了
-    // baseURL: 'https://www.easy-mock.com/mock/592501a391470c0ac1fab128',
-    timeout: 5000
-});
+    // baseURL: process.env.BASE_API, // api 的 base_url
+    baseURL: BASE_API,
 
-service.interceptors.request.use(
-    config => {
-        return config;
-    },
-    error => {
-        console.log(error);
-        return Promise.reject();
-    }
-);
-
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    transformRequest: [function(data) {
+        data = Qs.stringify(data)
+        return data
+    }],
+    timeout: 5000 // 请求超时时间
+})
+service.defaults.withCredentials = true;
+// response 拦截器
 service.interceptors.response.use(
     response => {
-        if (response.status === 200) {
-            return response.data;
-        } else {
-            Promise.reject();
+        const res = response.data
+        if(res.code !== 2000){
+            console.log(res.message)
         }
+        return res;
     },
     error => {
-        console.log(error);
-        return Promise.reject();
-    }
-);
+        console.log('http_err: ' + error) // for debug
 
-export default service;
+        // router.push('/');
+        return Promise.reject(error)
+    }
+)
+
+
+
+export default service
