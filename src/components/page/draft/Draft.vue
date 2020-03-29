@@ -95,9 +95,9 @@
 </template>
 
 <script>
-import { fetchArticles } from '../../../api/article';
+    import {  fetchDrafts } from '../../../api/article';
 export default {
-    name: 'articles',
+    name: 'draft',
     data() {
         return {
             query: {
@@ -130,7 +130,7 @@ export default {
     methods: {
         // 获取 easy-mock 的模拟数据
         getData() {
-            fetchArticles(this.query.pageIndex-1,this.query.pageSize).then(res => {
+            fetchDrafts(this.query.pageIndex-1,this.query.pageSize).then(res => {
                 const data = res.data
                 this.tableData = data.content
                 this.pageTotal = data.totalPages

@@ -63,49 +63,54 @@ export default {
                     title: '系统首页'
                 },
                 {
-                    icon: 'el-icon-lx-home',
+                    icon: 'el-icon-edit',
                     index: 'editor',
                     title: '发表文章',
                 },
                 {
-                    icon: 'el-icon-lx-home',
-                    index: 'articles',
+                    icon: 'el-icon-notebook-1',
+                    index: 'article',
                     title: '文章管理',
                 },
                 {
-                    icon: 'el-icon-lx-home',
+                    icon: 'el-icon-receiving',
+                    index: 'draft',
+                    title: '草稿箱',
+                },
+                {
+                    icon: 'el-icon-collection-tag',
                     index: 'category',
                     title: '分类管理',
                 },
                 {
-                    icon: 'el-icon-lx-home',
-                    index: 'introduction',
-                    title: '博客信息设置',
-                },
-                {
-                    icon: 'el-icon-lx-home',
-                    index: 'blogger',
-                    title: '博主信息管理',
-                },
-                {
-                    icon: 'el-icon-lx-home',
-                    index: 'guest',
-                    title: '访客管理',
-                },
-                {
-                    icon: 'el-icon-lx-home',
+                    icon: 'el-icon-chat-line-square',
                     index: 'comment',
                     title: '评论管理',
                 },
                 {
-                    icon: 'el-icon-lx-home',
+                    icon: 'el-icon-message',
                     index: 'message',
                     title: '留言管理',
                 },
                 {
-                    icon: 'el-icon-lx-cascades',
-                    index: 'table',
-                    title: '基础表格'
+                    icon: 'el-icon-link',
+                    index: 'link',
+                    title: '友链管理',
+                },
+                {
+                    icon: 'el-icon-coin',
+                    index: 'introduction',
+                    title: '博客信息',
+                },
+                {
+                    icon: 'el-icon-user',
+                    index: 'blogger',
+                    title: '博主信息',
+                },
+                {
+                    icon: 'el-icon-setting',
+                    index: 'setting',
+                    title: '设置',
                 },
                 {
                     icon: 'el-icon-lx-copy',
@@ -165,11 +170,6 @@ export default {
                             title: '拖拽弹框'
                         }
                     ]
-                },
-                {
-                    icon: 'el-icon-lx-global',
-                    index: 'i18n',
-                    title: '国际化功能'
                 },
                 {
                     icon: 'el-icon-lx-warn',

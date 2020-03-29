@@ -3,7 +3,7 @@
         <div class="crumbs">
             <el-breadcrumb separator="/">
                 <el-breadcrumb-item>
-                    <i class="el-icon-lx-cascades"></i> 文章管理
+                    <i class="el-icon-lx-cascades"></i> 分类管理
                 </el-breadcrumb-item>
             </el-breadcrumb>
         </div>
@@ -27,27 +27,9 @@
             >
                 <el-table-column type="selection" width="55" align="center"></el-table-column>
                 <el-table-column prop="id" label="ID" width="55" align="center"></el-table-column>
-                <el-table-column prop="title" label="标题"></el-table-column>
-                <el-table-column label="封面" align="center">
-                    <template slot-scope="scope">
-                        <el-image
-                            class="table-td-thumb"
-                            :src="scope.row.thumbnailUrl"
-                            :preview-src-list="[scope.row.thumbnailUrl]"
-                        ></el-image>
-                    </template>
-                </el-table-column>
-                <el-table-column prop="category" label="分类"></el-table-column>
-                <el-table-column label="创建时间">
-                    <template slot-scope="scope">
-                        {{ scope.row.createTime | dateFmt('YYYY/MM/DD HH:mm:SS')}}
-                    </template>
-                </el-table-column>
-                <el-table-column label="更新时间">
-                    <template slot-scope="scope">
-                        {{scope.row.updateTime | dateFmt('YYYY/MM/DD HH:mm:SS')}}
-                    </template>
-                </el-table-column>
+                <el-table-column prop="name" label="分类名称"></el-table-column>
+                <el-table-column prop="count" label="文章数量"></el-table-column>
+
                 <el-table-column label="操作" width="180" align="center">
                     <template slot-scope="scope">
                         <el-button
@@ -79,11 +61,8 @@
         <!-- 编辑弹出框 -->
         <el-dialog title="编辑" :visible.sync="editVisible" width="30%">
             <el-form ref="form" :model="form" label-width="70px">
-                <el-form-item label="用户名">
+                <el-form-item label="分类名">
                     <el-input v-model="form.name"></el-input>
-                </el-form-item>
-                <el-form-item label="地址">
-                    <el-input v-model="form.address"></el-input>
                 </el-form-item>
             </el-form>
             <span slot="footer" class="dialog-footer">
@@ -95,24 +74,14 @@
 </template>
 
 <script>
-import { fetchArticles } from '../../../api/article';
+import { fetchCategories } from '../../../api/category';
 export default {
-    name: 'articles',
+    name: 'categories',
     data() {
         return {
             query: {
                 pageIndex: 1,
                 pageSize: 10
-            },
-            articleItem : {
-                id:5,
-                thumbnailUrl:"",
-                title:"开过课",
-                summary:"也要",
-                categoryId:0,
-                category:"默认分类",
-                createTime:"2020-03-29T09:52:25.000+0000",
-                updateTime:"2020-03-29T09:52:25.000+0000"
             },
             tableData: [],
             multipleSelection: [],
@@ -130,10 +99,11 @@ export default {
     methods: {
         // 获取 easy-mock 的模拟数据
         getData() {
-            fetchArticles(this.query.pageIndex-1,this.query.pageSize).then(res => {
+            fetchCategories()
+            fetchCategories().then(res => {
                 const data = res.data
-                this.tableData = data.content
-                this.pageTotal = data.totalPages
+                this.tableData = data.content;
+                this.pageTotal = data.totalElements;
             });
         },
         // 触发搜索按钮

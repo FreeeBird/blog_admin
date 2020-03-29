@@ -21,12 +21,22 @@ const routeMap = [
             {
                 path: '/editor',
                 component: () => import(/* webpackChunkName: "editor" */ '../components/page/article/ArticleEditor'),
-                meta: { title: '发表文章' }
+                meta: { title: '发表文章', keepAlive: true}
             },
             {
-                path: '/articles',
+                path: '/article',
                 component: () => import(/* webpackChunkName: "articles" */ '../components/page/article/PublicArticle'),
-                meta: { title: '文章管理' }
+                meta: { title: '文章管理' , keepAlive: false}
+            },
+            {
+                path: '/draft',
+                component: () => import(/* webpackChunkName: "articles" */ '../components/page/draft/Draft'),
+                meta: { title: '草稿箱' , keepAlive: false}
+            },
+            {
+                path: '/category',
+                component: () => import('../components/page/category/Categories'),
+                meta: { title: '分类管理'}
             },
             {
                 path: '/icon',

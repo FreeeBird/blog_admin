@@ -12,7 +12,16 @@ export const fetchArticles = (num,size) => {
         }
     });
 };
-// http://localhost:8888/blog/api/blogger
+export const fetchDrafts = (num,size) => {
+    return request({
+        url: URL + '/draft',
+        method: 'GET',
+        params: {
+            pageNum :num,
+            pageSize:size
+        }
+    });
+};
 
 
 
