@@ -35,6 +35,7 @@
 
             <el-row>
                 <quill-editor  v-if="article.type===0" ref="myTextEditor" v-model="article.content" :options="editorOption"></quill-editor>
+<!--                <div v-if="article.type===0" ref="editorElem" ></div>-->
                 <mavon-editor v-else v-model="article.content" ref="md" @imgAdd="$imgAdd" @change="change" placeholder="" style="min-height: 600px"/>
             </el-row>
 
@@ -55,12 +56,13 @@
     import 'quill/dist/quill.core.css';
     import 'quill/dist/quill.snow.css';
     import 'quill/dist/quill.bubble.css';
-    import { quillEditor } from 'vue-quill-editor';
     import { mavonEditor } from 'mavon-editor'
     import 'mavon-editor/dist/css/index.css'
-    import { fetchArticles, publishArticle } from '../../../api/article';
-    import { fetchTest } from '../../../api';
+    import {  publishArticle } from '../../../api/article';
     import { fetchCategories } from '../../../api/category';
+    import {quillEditor, Quill} from 'vue-quill-editor'
+    import {container, ImageExtend, QuillWatch} from 'quill-image-extend-module'
+    Quill.register('modules/ImageExtend', ImageExtend)
     export default {
         name: 'publish',
         data: function(){
@@ -70,6 +72,7 @@
                     { id: 1, name: "生活随想" },
                 ],
                 select_category: 0,
+                updateUrl: "https://qinuiu.com/update",
                 article:{
                     // createTime: null,
                     // id: null,
@@ -84,7 +87,25 @@
                 },
                 html:'',
                 editorOption: {
-                    placeholder: ''
+                    modules: {
+                        ImageExtend: {
+                            loading: true,
+                            name: 'img',
+                            size: 3,
+                            action: 'https://qinuiu.com/update',
+                            response: (res) => {
+                                return res.info
+                            }
+                        },
+                        toolbar: {
+                            container: container,
+                            handlers: {
+                                'image': function () {
+                                    QuillWatch.emit(this.quill.id)
+                                }
+                            }
+                        }
+                    }
                 }
             }
         },

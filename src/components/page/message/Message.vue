@@ -9,13 +9,13 @@
         </div>
         <div class="container">
             <div class="handle-box">
-                <el-button
-                    type="primary"
-                    icon="el-icon-delete"
-                    class="handle-del mr10"
-                    @click="delAllSelection"
-                >批量删除</el-button>
-                <el-button type="primary" icon="el-icon-search" @click="handleSearch">搜索</el-button>
+<!--                <el-button-->
+<!--                    type="primary"-->
+<!--                    icon="el-icon-delete"-->
+<!--                    class="handle-del mr10"-->
+<!--                    @click="delAllSelection"-->
+<!--                >批量删除</el-button>-->
+<!--                <el-button type="primary" icon="el-icon-search" @click="handleSearch">搜索</el-button>-->
             </div>
             <el-table
                 :data="tableData"
@@ -37,11 +37,11 @@
                 </el-table-column>
                 <el-table-column label="操作" width="180" align="center">
                     <template slot-scope="scope">
-                        <el-button
-                            type="text"
-                            icon="el-icon-edit"
-                            @click="handleEdit(scope.$index, scope.row)"
-                        >编辑</el-button>
+<!--                        <el-button-->
+<!--                            type="text"-->
+<!--                            icon="el-icon-edit"-->
+<!--                            @click="handleEdit(scope.$index, scope.row)"-->
+<!--                        >编辑</el-button>-->
                         <el-button
                             type="text"
                             icon="el-icon-delete"
@@ -79,8 +79,7 @@
 </template>
 
 <script>
-import { fetchCategories } from '../../../api/category';
-import { fetchMessages } from '../../../api/message';
+    import { deleteMessage, fetchMessages } from '../../../api/message';
 export default {
     name: 'message',
     data() {
@@ -123,8 +122,15 @@ export default {
                 type: 'warning'
             })
                 .then(() => {
-                    this.$message.success('删除成功');
-                    this.tableData.splice(index, 1);
+                    deleteMessage(row.id).then(res =>{
+                        if(res.code===2000){
+                            this.$message.success('删除成功');
+                            this.tableData.splice(index, 1);
+                        }else {
+                            this.$message.error('删除失败');
+                        }
+                    })
+
                 })
                 .catch(() => {});
         },

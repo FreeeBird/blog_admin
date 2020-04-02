@@ -15,3 +15,10 @@ export function fetchMessages(num,size){
         }
     })
 }
+
+export function deleteMessage(id) {
+    return request({
+        url: URL + '/' +id,
+        method: 'DELETE'
+    })
+}
