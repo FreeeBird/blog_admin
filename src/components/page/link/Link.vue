@@ -3,7 +3,7 @@
         <div class="crumbs">
             <el-breadcrumb separator="/">
                 <el-breadcrumb-item>
-                    <i class="el-icon-lx-cascades"></i> 分类管理
+                    <i class="el-icon-lx-cascades"></i> 链接管理
                 </el-breadcrumb-item>
             </el-breadcrumb>
         </div>
@@ -27,9 +27,14 @@
             >
                 <el-table-column type="selection" width="55" align="center"></el-table-column>
                 <el-table-column prop="id" label="ID" width="55" align="center"></el-table-column>
-                <el-table-column prop="name" label="分类名称"></el-table-column>
-                <el-table-column prop="count" label="文章数量"></el-table-column>
-
+                <el-table-column prop="title" label="网站名"></el-table-column>
+                <el-table-column prop="url" label="网站地址"></el-table-column>
+                <el-table-column prop="description" label="网站简介"></el-table-column>
+                <el-table-column label="时间">
+                    <template slot-scope="scope">
+                        {{ scope.row.createTime | dateFmt('YYYY/MM/DD HH:mm:SS')}}
+                    </template>
+                </el-table-column>
                 <el-table-column label="操作" width="180" align="center">
                     <template slot-scope="scope">
                         <el-button
@@ -74,9 +79,9 @@
 </template>
 
 <script>
-    import { deleteCategory, fetchCategories, saveCategory } from '../../../api/category';
+import { fetchLinks } from '../../../api/link';
 export default {
-    name: 'categories',
+    name: 'message',
     data() {
         return {
             query: {
@@ -99,7 +104,7 @@ export default {
     methods: {
         // 获取 easy-mock 的模拟数据
         getData() {
-            fetchCategories().then(res => {
+            fetchLinks(this.query.pageIndex-1,this.query.pageSize).then(res => {
                 const data = res.data
                 this.tableData = data.content;
                 this.pageTotal = data.totalElements;
@@ -113,18 +118,14 @@ export default {
         // 删除操作
         handleDelete(index, row) {
             // 二次确认删除
-            this.$confirm('确定要删除吗？（分类下的文章都会转为默认分类下）', '提示', {
+            this.$confirm('确定要删除吗？', '提示', {
                 type: 'warning'
             })
                 .then(() => {
-                    deleteCategory(row.id).then(res => {
-                        if(res.code === 2000){
-                            this.$message.success('删除成功');
-                            this.tableData.splice(index, 1);
-                        }
-                    })
-
+                    this.$message.success('删除成功');
+                    this.tableData.splice(index, 1);
                 })
+                .catch(() => {});
         },
         // 多选操作
         handleSelectionChange(val) {
@@ -149,13 +150,8 @@ export default {
         // 保存编辑
         saveEdit() {
             this.editVisible = false;
-            saveCategory(this.form).then(res => {
-                if(res.code === 2000){
-                    this.$message.success(`修改第 ${this.idx + 1} 行成功`);
-                    this.$set(this.tableData, this.idx, this.form);
-                }
-            })
-
+            this.$message.success(`修改第 ${this.idx + 1} 行成功`);
+            this.$set(this.tableData, this.idx, this.form);
         },
         // 分页导航
         handlePageChange(val) {

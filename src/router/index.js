@@ -44,6 +44,11 @@ const routeMap = [
                 meta: { title: '留言管理'}
             },
             {
+                path: '/link',
+                component: () => import('../components/page/link/Link'),
+                meta: { title: '链接管理'}
+            },
+            {
                 path: '/blogInfo',
                 component: () => import('../components/page/blogInfo/BlogInfo'),
                 meta: { title: '博客信息'}
@@ -51,7 +56,7 @@ const routeMap = [
             {
                 path: '/blogger',
                 component: () => import('../components/page/blogger/Blogger'),
-                meta: { title: '博客信息'}
+                meta: { title: '博主信息'}
             },
             {
                 path: '/icon',

@@ -96,6 +96,8 @@ export default {
                 }else {
                     this.$message.warning(re.message)
                 }
+            }).catch(err=>{
+                this.$message.error(err)
             })
         },
     },

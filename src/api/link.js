@@ -1,11 +1,11 @@
 import request from '../utils/request';
 
-const URL = '/admin/message'
+const URL = '/admin/link'
 /**
  * 获取所有
  * @returns {AxiosPromise}
  */
-export function fetchMessages(num,size){
+export function fetchLinks(num,size){
     return request({
         url: URL +'',
         method: 'GET',

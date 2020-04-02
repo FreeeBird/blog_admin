@@ -25,10 +25,10 @@ export const fetchDrafts = (num,size) => {
 
 
 
-export function publishArticle(a){
+export function publishArticle(article){
     return request({
         url: URL +'',
         method: 'POST',
-        data:a
+        data: article
     })
 }

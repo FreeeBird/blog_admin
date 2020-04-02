@@ -79,7 +79,6 @@
                     summary: "",
                     content: '',
                     categoryId: 0,
-                    category: '默认分类',
                     status: 0,
                     type: 0
                 },

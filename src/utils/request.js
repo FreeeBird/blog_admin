@@ -1,7 +1,8 @@
 import axios from 'axios'
 // import router from '@/plugins/router'
 import Qs from 'qs'
-import vue from 'vue'
+import Vue from 'vue'
+import router from '../router';
 
 const BASE_API = 'http://localhost:8888/blog/api';
 // 创建axios实例
@@ -22,14 +23,13 @@ service.interceptors.response.use(
     response => {
         const res = response
         if(res.status !== 200){
-            vue.prototype.$message.error(res.statusText)
+            Vue.prototype.$message.warning(res.statusText)
         }
         return res.data;
     },
     error => {
         console.log('http_err: ' + error) // for debug
-        // this.$message.error(error)
-        // router.push('/');
+        Vue.prototype.$message.error('http_error:'+error)
         return Promise.reject(error)
     }
 )

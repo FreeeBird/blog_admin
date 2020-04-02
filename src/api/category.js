@@ -12,3 +12,20 @@ export function fetchCategories(){
         method: 'GET',
     })
 }
+
+
+export function saveCategory(data) {
+    return request({
+        url: URL + '',
+        method: 'POST',
+        data: data
+    })
+}
+
+
+export function deleteCategory(id) {
+    return request({
+        url : URL + '/'+ id,
+        method: 'DELETE'
+    })
+}
