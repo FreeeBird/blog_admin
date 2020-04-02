@@ -9,13 +9,14 @@
         </div>
         <div class="container">
             <div class="handle-box">
-                <el-button
-                    type="primary"
-                    icon="el-icon-delete"
-                    class="handle-del mr10"
-                    @click="delAllSelection"
-                >批量删除</el-button>
-                <el-button type="primary" icon="el-icon-search" @click="handleSearch">搜索</el-button>
+<!--                <el-button-->
+<!--                    type="primary"-->
+<!--                    icon="el-icon-delete"-->
+<!--                    class="handle-del mr10"-->
+<!--                    @click="delAllSelection"-->
+<!--                >批量删除</el-button>-->
+<!--                <el-button type="primary" icon="el-icon-search" @click="handleSearch">搜索</el-button>-->
+                <el-button type="primary" icon="el-icon-plus" @click="handleAdd">添加</el-button>
             </div>
             <el-table
                 :data="tableData"
@@ -66,8 +67,14 @@
         <!-- 编辑弹出框 -->
         <el-dialog title="编辑" :visible.sync="editVisible" width="30%">
             <el-form ref="form" :model="form" label-width="70px">
-                <el-form-item label="分类名">
-                    <el-input v-model="form.name"></el-input>
+                <el-form-item label="网站名">
+                    <el-input v-model="form.title"></el-input>
+                </el-form-item>
+                <el-form-item label="网站地址">
+                    <el-input v-model="form.url"></el-input>
+                </el-form-item>
+                <el-form-item label="网站简介">
+                    <el-input v-model="form.description"></el-input>
                 </el-form-item>
             </el-form>
             <span slot="footer" class="dialog-footer">
@@ -75,11 +82,29 @@
                 <el-button type="primary" @click="saveEdit">确 定</el-button>
             </span>
         </el-dialog>
+        <!-- 添加弹出框 -->
+        <el-dialog title="添加链接" :visible.sync="addVisible" width="30%">
+            <el-form ref="form" :model="link" label-width="70px">
+                <el-form-item label="网站名">
+                    <el-input v-model="link.title"></el-input>
+                </el-form-item>
+                <el-form-item label="网站地址">
+                    <el-input v-model="link.url"></el-input>
+                </el-form-item>
+                <el-form-item label="网站简介">
+                    <el-input v-model="link.description"></el-input>
+                </el-form-item>
+            </el-form>
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="addVisible = false">取 消</el-button>
+                <el-button type="primary" @click="addLink">确 定</el-button>
+            </span>
+        </el-dialog>
     </div>
 </template>
 
 <script>
-import { fetchLinks } from '../../../api/link';
+    import { deleteLink, fetchLinks, saveLink, updateLink } from '../../../api/link';
 export default {
     name: 'message',
     data() {
@@ -92,6 +117,8 @@ export default {
             multipleSelection: [],
             delList: [],
             editVisible: false,
+            addVisible: false,
+            link:{},
             pageTotal: 0,
             form: {},
             idx: -1,
@@ -110,6 +137,9 @@ export default {
                 this.pageTotal = data.totalElements;
             });
         },
+        handleAdd(){
+            this.addVisible = true;
+        },
         // 触发搜索按钮
         handleSearch() {
             this.$set(this.query, 'pageIndex', 1);
@@ -122,8 +152,14 @@ export default {
                 type: 'warning'
             })
                 .then(() => {
-                    this.$message.success('删除成功');
-                    this.tableData.splice(index, 1);
+                    deleteLink(row.id).then(res => {
+                        if(res.code === 2000){
+                            this.$message.success('删除成功');
+                            this.tableData.splice(index, 1);
+                            this.pageTotal -= 1
+                        }
+                    })
+
                 })
                 .catch(() => {});
         },
@@ -150,8 +186,24 @@ export default {
         // 保存编辑
         saveEdit() {
             this.editVisible = false;
-            this.$message.success(`修改第 ${this.idx + 1} 行成功`);
-            this.$set(this.tableData, this.idx, this.form);
+            this.$delete(this.form,"createTime")
+            updateLink(this.form).then(res => {
+                this.form = res.data
+                this.$message.success(`修改第 ${this.idx + 1} 行成功`);
+                this.$set(this.tableData, this.idx, this.form);
+            })
+        },
+        addLink() {
+            this.addVisible = false;
+            saveLink(this.link).then(res => {
+                this.link = res.data
+                this.tableData.push(this.link)
+                this.link = {}
+                this.pageTotal += 1
+                this.$message.success(`添加成功`);
+            })
+
+
         },
         // 分页导航
         handlePageChange(val) {
