@@ -1,11 +1,11 @@
 import request from '../utils/request';
 
-const URL = '/admin/message'
+const URL = '/admin/comment'
 /**
  * 获取所有
  * @returns {AxiosPromise}
  */
-export function fetchMessages(num,size){
+export function fetchComment(num,size){
     return request({
         url: URL +'',
         method: 'GET',
@@ -13,5 +13,12 @@ export function fetchMessages(num,size){
             pageNum:num,
             pageSize:size
         }
+    })
+}
+
+export function deleteComment(id) {
+    return request({
+        url: URL + '/'+ id,
+        method: 'DELETE'
     })
 }

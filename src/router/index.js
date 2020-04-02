@@ -39,6 +39,11 @@ const routeMap = [
                 meta: { title: '分类管理'}
             },
             {
+                path: '/comment',
+                component: () => import('../components/page/comment/Comment'),
+                meta: { title: '评论管理'}
+            },
+            {
                 path: '/message',
                 component: () => import('../components/page/message/Message'),
                 meta: { title: '留言管理'}
