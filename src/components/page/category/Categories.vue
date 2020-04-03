@@ -9,13 +9,8 @@
         </div>
         <div class="container">
             <div class="handle-box">
-                <el-button
-                    type="primary"
-                    icon="el-icon-delete"
-                    class="handle-del mr10"
-                    @click="delAllSelection"
-                >批量删除</el-button>
-                <el-button type="primary" icon="el-icon-search" @click="handleSearch">搜索</el-button>
+                <el-button type="primary" icon="el-icon-plus" @click="handleAdd">添加</el-button>
+                <el-button  icon="el-icon-plus" @click="getData">刷新</el-button>
             </div>
             <el-table
                 :data="tableData"
@@ -23,9 +18,8 @@
                 class="table"
                 ref="multipleTable"
                 header-cell-class-name="table-header"
-                @selection-change="handleSelectionChange"
             >
-                <el-table-column type="selection" width="55" align="center"></el-table-column>
+<!--                <el-table-column type="selection" width="55" align="center"></el-table-column>-->
                 <el-table-column prop="id" label="ID" width="55" align="center"></el-table-column>
                 <el-table-column prop="name" label="分类名称"></el-table-column>
                 <el-table-column prop="count" label="文章数量"></el-table-column>
@@ -70,11 +64,23 @@
                 <el-button type="primary" @click="saveEdit">确 定</el-button>
             </span>
         </el-dialog>
+        <!-- 添加弹出框 -->
+        <el-dialog title="添加分类" :visible.sync="addVisible" width="30%">
+            <el-form ref="form" :model="form" label-width="70px">
+                <el-form-item label="分类名">
+                    <el-input v-model="form.name"></el-input>
+                </el-form-item>
+            </el-form>
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="addVisible = false">取 消</el-button>
+                <el-button type="primary" @click="saveAdd">确 定</el-button>
+            </span>
+        </el-dialog>
     </div>
 </template>
 
 <script>
-    import { deleteCategory, fetchCategories, saveCategory } from '../../../api/category';
+    import { addCategory, deleteCategory, fetchCategories, saveCategory } from '../../../api/category';
 export default {
     name: 'categories',
     data() {
@@ -84,9 +90,8 @@ export default {
                 pageSize: 10
             },
             tableData: [],
-            multipleSelection: [],
-            delList: [],
             editVisible: false,
+            addVisible: false,
             pageTotal: 0,
             form: {},
             idx: -1,
@@ -101,14 +106,14 @@ export default {
         getData() {
             fetchCategories().then(res => {
                 const data = res.data
+                this.tableData = []
                 this.tableData = data.content;
                 this.pageTotal = data.totalElements;
             });
         },
-        // 触发搜索按钮
-        handleSearch() {
-            this.$set(this.query, 'pageIndex', 1);
-            this.getData();
+        handleAdd(){
+            this.form = {}
+            this.addVisible = true;
         },
         // 删除操作
         handleDelete(index, row) {
@@ -126,20 +131,6 @@ export default {
 
                 })
         },
-        // 多选操作
-        handleSelectionChange(val) {
-            this.multipleSelection = val;
-        },
-        delAllSelection() {
-            const length = this.multipleSelection.length;
-            let str = '';
-            this.delList = this.delList.concat(this.multipleSelection);
-            for (let i = 0; i < length; i++) {
-                str += this.multipleSelection[i].name + ' ';
-            }
-            this.$message.error(`删除了${str}`);
-            this.multipleSelection = [];
-        },
         // 编辑操作
         handleEdit(index, row) {
             this.idx = index;
@@ -153,6 +144,17 @@ export default {
                 if(res.code === 2000){
                     this.$message.success(`修改第 ${this.idx + 1} 行成功`);
                     this.$set(this.tableData, this.idx, this.form);
+                }
+            })
+
+        },
+        saveAdd() {
+            this.addVisible = false;
+            addCategory(this.form).then(res => {
+                const re = res;
+                if(re.code === 2000){
+                    this.$message.success(`添加成功`);
+                    this.tableData.push(re.data);
                 }
             })
 

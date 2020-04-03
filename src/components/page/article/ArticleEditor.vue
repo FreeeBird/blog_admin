@@ -62,7 +62,6 @@
     import { fetchCategories } from '../../../api/category';
     import {quillEditor, Quill} from 'vue-quill-editor'
     import {container, ImageExtend, QuillWatch} from 'quill-image-extend-module'
-    import { uploadImg } from '../../../api';
     import axios from 'axios'
     Quill.register('modules/ImageExtend', ImageExtend)
     export default {
@@ -71,10 +70,9 @@
             return {
                 categories:[
                     { id: 0, name: "默认分类" },
-                    { id: 1, name: "生活随想" },
                 ],
                 select_category: 0,
-                updateUrl: "localhost:8888/blog/api/admin/upload/img",
+                updateUrl: "http://localhost:8888/blog/api/admin/upload/img",
                 article:{
                     // createTime: null,
                     // id: null,

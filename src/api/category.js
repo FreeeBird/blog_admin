@@ -17,6 +17,13 @@ export function fetchCategories(){
 export function saveCategory(data) {
     return request({
         url: URL + '',
+        method: 'PUT',
+        data: data
+    })
+}
+export function addCategory(data) {
+    return request({
+        url: URL + '',
         method: 'POST',
         data: data
     })
