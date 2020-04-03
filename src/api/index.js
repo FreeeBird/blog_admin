@@ -1,4 +1,5 @@
 import request from '../utils/request';
+import axios from 'axios'
 
 export const fetchData = query => {
     return request({
@@ -23,3 +24,13 @@ export function fetchTest(query){
 //     });
 // };
 // http://localhost:8888/blog/api/blogger
+
+export function uploadImg(formdata ){
+    return axios.create({
+        url: '/blog/api/admin/upload/img',
+        method: 'post',
+        data: formdata,
+        headers: { 'Content-Type': 'multipart/form-data' },
+    })
+
+}
