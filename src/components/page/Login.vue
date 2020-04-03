@@ -1,7 +1,7 @@
 <template>
     <div class="login-wrap">
         <div class="ms-login">
-            <div class="ms-title">后台管理系统</div>
+            <div class="ms-title">博客管理系统</div>
             <el-form :model="param" :rules="rules" ref="login" label-width="0px" class="ms-content">
                 <el-form-item prop="username">
                     <el-input v-model="param.username" placeholder="username">
@@ -28,6 +28,8 @@
 </template>
 
 <script>
+import { userLogin } from '../../api';
+
 export default {
     data: function() {
         return {
@@ -45,12 +47,19 @@ export default {
         submitForm() {
             this.$refs.login.validate(valid => {
                 if (valid) {
-                    this.$message.success('登录成功');
-                    localStorage.setItem('ms_username', this.param.username);
-                    this.$router.push('/');
+                    userLogin(this.param).then(res => {
+                        const re = res;
+                        if(re.code ===2000){
+                            this.$message.success('登录成功');
+                            localStorage.setItem('ms_username', this.param.username);
+                            this.$router.push('/');
+                        }else {
+                            this.$message.error(re.message);
+                            return false;
+                        }
+                    })
                 } else {
                     this.$message.error('请输入账号和密码');
-                    console.log('error submit!!');
                     return false;
                 }
             });
@@ -72,7 +81,7 @@ export default {
     line-height: 50px;
     text-align: center;
     font-size: 20px;
-    color: #fff;
+
     border-bottom: 1px solid #ddd;
 }
 .ms-login {
@@ -99,6 +108,5 @@ export default {
 .login-tips {
     font-size: 12px;
     line-height: 30px;
-    color: #fff;
 }
 </style>

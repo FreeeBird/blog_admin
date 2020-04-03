@@ -1,6 +1,14 @@
 import request from '../utils/request';
 import axios from 'axios'
 
+export function userLogin(query) {
+    return request({
+        url: '/login',
+        method: 'POST',
+        data: query
+    })
+}
+
 export const fetchData = query => {
     return request({
         url: './table.json',

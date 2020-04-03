@@ -16,11 +16,16 @@
                     <el-form-item label="用户名">
                         <el-input :disabled="!isEdit" v-model="form.username"></el-input>
                     </el-form-item>
+                    <el-alert
+                            title="用户名可用作系统登录"
+                            type="success"
+                            :closable="false">
+                    </el-alert>
                     <el-form-item label="Email">
                         {{ form.email }}
                     </el-form-item>
                     <el-alert
-                            title="用户名或者邮箱可用作系统登录"
+                            title="忘记账户密码时可用邮箱找回"
                             type="success"
                             :closable="false">
                     </el-alert>
@@ -28,9 +33,6 @@
                     <el-form-item label="头像">
                     <el-image :src="form.portraitUrl" style="width: 100px; height: 100px"
                               :preview-src-list="[form.portraitUrl]"></el-image>
-                    </el-form-item>
-                    <el-form-item label="Email">
-                        {{ form.email }}
                     </el-form-item>
                     <el-form-item label="个人简介">
                         <el-input :disabled="!isEdit" type="textarea" rows="5" v-model="form.introduction"></el-input>

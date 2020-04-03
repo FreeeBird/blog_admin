@@ -6,10 +6,14 @@ const URL = '/admin/category'
  * 获取所有分类
  * @returns {AxiosPromise}
  */
-export function fetchCategories(){
+export function fetchCategories(num,size){
     return request({
         url: URL +'',
         method: 'GET',
+        params: {
+            pageNum :num,
+            pageSize:size
+        }
     })
 }
 

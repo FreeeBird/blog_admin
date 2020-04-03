@@ -104,7 +104,7 @@ export default {
     methods: {
         // 获取 easy-mock 的模拟数据
         getData() {
-            fetchCategories().then(res => {
+            fetchCategories(this.query.pageIndex-1,this.query.pageSize).then(res => {
                 const data = res.data
                 this.tableData = []
                 this.tableData = data.content;

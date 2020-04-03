@@ -24,6 +24,7 @@ service.interceptors.response.use(
         const res = response
         if(res.status !== 200){
             Vue.prototype.$message.warning(res.statusText)
+            return res;
         }
         return res.data;
     },

@@ -142,6 +142,11 @@ const routeMap = [
         meta: { title: '登录' }
     },
     {
+        path: '/init',
+        component: () => import(/* webpackChunkName: "login" */ '../components/page/403.vue'),
+        meta: { title: '初始化' }
+    },
+    {
         path: '*',
         redirect: '/404'
     }
