@@ -5,7 +5,7 @@
             <i v-if="!collapse" class="el-icon-s-fold"></i>
             <i v-else class="el-icon-s-unfold"></i>
         </div>
-        <div class="logo">后台管理系统</div>
+        <div class="logo">博客管理系统</div>
         <div class="header-right">
             <div class="header-user-con">
                 <!-- 全屏显示 -->
@@ -15,32 +15,34 @@
                     </el-tooltip>
                 </div>
                 <!-- 消息中心 -->
-                <div class="btn-bell">
-                    <el-tooltip
-                        effect="dark"
-                        :content="message?`有${message}条未读消息`:`消息中心`"
-                        placement="bottom"
-                    >
-                        <router-link to="/tabs">
-                            <i class="el-icon-bell"></i>
-                        </router-link>
-                    </el-tooltip>
-                    <span class="btn-bell-badge" v-if="message"></span>
-                </div>
+<!--                <div class="btn-bell">-->
+<!--                    <el-tooltip-->
+<!--                        effect="dark"-->
+<!--                        :content="message?`有${message}条未读消息`:`消息中心`"-->
+<!--                        placement="bottom"-->
+<!--                    >-->
+<!--                        <router-link to="/tabs">-->
+<!--                            <i class="el-icon-bell"></i>-->
+<!--                        </router-link>-->
+<!--                    </el-tooltip>-->
+<!--                    <span class="btn-bell-badge" v-if="message"></span>-->
+<!--                </div>-->
                 <!-- 用户头像 -->
                 <div class="user-avator">
-                    <img src="../../assets/img/img.jpg" />
+                    <img :src="blogger.portraitUrl" />
                 </div>
                 <!-- 用户名下拉菜单 -->
                 <el-dropdown class="user-name" trigger="click" @command="handleCommand">
                     <span class="el-dropdown-link">
-                        {{username}}
+                        {{blogger.username}}
                         <i class="el-icon-caret-bottom"></i>
                     </span>
                     <el-dropdown-menu slot="dropdown">
-                        <a href="https://github.com/lin-xin/vue-manage-system" target="_blank">
-                            <el-dropdown-item>项目仓库</el-dropdown-item>
-                        </a>
+                            <el-dropdown-item>
+                                <router-link to="/blogger">
+                                    个人信息
+                                </router-link>
+                            </el-dropdown-item>
                         <el-dropdown-item divided command="loginout">退出登录</el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
@@ -50,13 +52,15 @@
 </template>
 <script>
 import bus from '../common/bus';
+import { userLogout } from '../../api';
 export default {
     data() {
         return {
             collapse: false,
             fullscreen: false,
             name: 'linxin',
-            message: 2
+            message: 2,
+            blogger:{},
         };
     },
     computed: {
@@ -65,12 +69,26 @@ export default {
             return username ? username : this.name;
         }
     },
+    created:function() {
+        this.getData()
+    },
     methods: {
+        getData(){
+            bus.$on("blogger",(e)=>{
+                this.blogger = e
+            })
+        },
         // 用户名下拉菜单选择事件
         handleCommand(command) {
             if (command == 'loginout') {
-                localStorage.removeItem('ms_username');
-                this.$router.push('/login');
+                userLogout().then(res =>{
+                    if(res.code===2000){
+                        localStorage.removeItem('ms_username');
+                        this.$message.info("")
+                        this.$router.push('/login');
+                    }
+                })
+
             }
         },
         // 侧边栏折叠

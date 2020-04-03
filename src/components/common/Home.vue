@@ -22,11 +22,13 @@ import vHead from './Header.vue';
 import vSidebar from './Sidebar.vue';
 import vTags from './Tags.vue';
 import bus from './bus';
+import { fetchBlogger } from '../../api/blogger';
 export default {
     data() {
         return {
             tagsList: [],
-            collapse: false
+            collapse: false,
+            blogger: {}
         };
     },
     components: {
@@ -47,6 +49,15 @@ export default {
             }
             this.tagsList = arr;
         });
+        this.getData()
+    },
+    methods:{
+        getData(){
+            fetchBlogger().then(res => {
+                this.blogger = res.data;
+                bus.$emit("blogger",this.blogger)
+            })
+        }
     }
 };
 </script>

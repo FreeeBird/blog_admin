@@ -9,6 +9,14 @@ export function userLogin(query) {
     })
 }
 
+export function userLogout() {
+    return request({
+        url: '/logout',
+        method: 'POST',
+    })
+}
+
+
 export const fetchData = query => {
     return request({
         url: './table.json',
