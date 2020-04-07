@@ -68,11 +68,6 @@ const routeMap = [
                 meta: { title: '博主信息'}
             },
             {
-                path: '/icon',
-                component: () => import(/* webpackChunkName: "icon" */ '../components/page/Icon.vue'),
-                meta: { title: '自定义图标' }
-            },
-            {
                 // 图片上传组件
                 path: '/upload',
                 component: () => import(/* webpackChunkName: "upload" */ '../components/page/Upload.vue'),
