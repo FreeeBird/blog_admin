@@ -132,8 +132,7 @@ vue.js 封装 sChart.js 的图表组件。访问地址：[vue-schart](https://gi
 ```JavaScript
 {
     // 富文本编辑器组件
-    path: '/editor',
-    component: resolve => require(['../components/page/VueEditor.vue'], resolve)
+    path: '/editor'
 },
 ```
 

@@ -8,25 +8,22 @@
             </el-breadcrumb>
         </div>
         <div class="container">
-            <div class="handle-box">
-                <el-button
-                    type="primary"
-                    icon="el-icon-delete"
-                    class="handle-del mr10"
-                    @click="delAllSelection"
-                >批量删除</el-button>
-                <el-button type="primary" icon="el-icon-search" @click="handleSearch">搜索</el-button>
-            </div>
+<!--            <div class="handle-box">-->
+<!--                <el-button-->
+<!--                    type="primary"-->
+<!--                    icon="el-icon-delete"-->
+<!--                    class="handle-del mr10"-->
+<!--                    @click="delAllSelection"-->
+<!--                >批量删除</el-button>-->
+<!--                <el-button type="primary" icon="el-icon-search" @click="handleSearch">搜索</el-button>-->
+<!--            </div>-->
             <el-table
                 :data="tableData"
                 border
                 stripe
                 class="table"
-                ref="multipleTable"
                 header-cell-class-name="table-header"
-                @selection-change="handleSelectionChange"
             >
-                <el-table-column type="selection" width="55" align="center"></el-table-column>
                 <el-table-column prop="id" label="ID" width="55" align="center"></el-table-column>
                 <el-table-column prop="title" label="标题"></el-table-column>
                 <el-table-column label="封面" align="center">
@@ -77,21 +74,6 @@
             </div>
         </div>
 
-        <!-- 编辑弹出框 -->
-        <el-dialog title="编辑" :visible.sync="editVisible" width="30%">
-            <el-form ref="form" :model="form" label-width="70px">
-                <el-form-item label="用户名">
-                    <el-input v-model="form.name"></el-input>
-                </el-form-item>
-                <el-form-item label="地址">
-                    <el-input v-model="form.address"></el-input>
-                </el-form-item>
-            </el-form>
-            <span slot="footer" class="dialog-footer">
-                <el-button @click="editVisible = false">取 消</el-button>
-                <el-button type="primary" @click="saveEdit">确 定</el-button>
-            </span>
-        </el-dialog>
     </div>
 </template>
 
@@ -137,11 +119,6 @@ export default {
                 this.pageTotal = data.totalElements
             });
         },
-        // 触发搜索按钮
-        handleSearch() {
-            this.$set(this.query, 'pageIndex', 1);
-            this.getData();
-        },
         // 删除操作
         handleDelete(index, row) {
             // 二次确认删除
@@ -154,31 +131,9 @@ export default {
                 })
                 .catch(() => {});
         },
-        // 多选操作
-        handleSelectionChange(val) {
-            this.multipleSelection = val;
-        },
-        delAllSelection() {
-            const length = this.multipleSelection.length;
-            let str = '';
-            this.delList = this.delList.concat(this.multipleSelection);
-            for (let i = 0; i < length; i++) {
-                str += this.multipleSelection[i].name + ' ';
-            }
-            this.$message.error(`删除了${str}`);
-            this.multipleSelection = [];
-        },
         // 编辑操作
         handleEdit(index, row) {
-            this.idx = index;
-            this.form = row;
-            this.editVisible = true;
-        },
-        // 保存编辑
-        saveEdit() {
-            this.editVisible = false;
-            this.$message.success(`修改第 ${this.idx + 1} 行成功`);
-            this.$set(this.tableData, this.idx, this.form);
+            this.$router.push('/article/'+row.id)
         },
         // 分页导航
         handlePageChange(val) {

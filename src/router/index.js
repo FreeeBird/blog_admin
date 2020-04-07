@@ -24,6 +24,11 @@ const routeMap = [
                 meta: { title: '发表文章', keepAlive: true}
             },
             {
+                path: '/article/:id',
+                component: () => import(/* webpackChunkName: "editor" */ '../components/page/draft/EditArticle'),
+                meta: { title: '编辑文章', keepAlive: false}
+            },
+            {
                 path: '/article',
                 component: () => import(/* webpackChunkName: "articles" */ '../components/page/article/PublicArticle'),
                 meta: { title: '文章管理' , keepAlive: false}
@@ -69,21 +74,6 @@ const routeMap = [
                 meta: { title: '自定义图标' }
             },
             {
-                path: '/table',
-                component: () => import(/* webpackChunkName: "table" */ '../components/page/BaseTable.vue'),
-                meta: { title: '基础表格' }
-            },
-            {
-                path: '/tabs',
-                component: () => import(/* webpackChunkName: "tabs" */ '../components/page/Tabs.vue'),
-                meta: { title: 'tab选项卡' }
-            },
-            {
-                path: '/form',
-                component: () => import(/* webpackChunkName: "form" */ '../components/page/BaseForm.vue'),
-                meta: { title: '基本表单' }
-            },
-            {
                 // 图片上传组件
                 path: '/upload',
                 component: () => import(/* webpackChunkName: "upload" */ '../components/page/Upload.vue'),
@@ -96,30 +86,6 @@ const routeMap = [
                 meta: { title: 'schart图表' }
             },
             {
-                // 拖拽列表组件
-                path: '/drag',
-                component: () => import(/* webpackChunkName: "drag" */ '../components/page/DragList.vue'),
-                meta: { title: '拖拽列表' }
-            },
-            {
-                // 拖拽Dialog组件
-                path: '/dialog',
-                component: () => import(/* webpackChunkName: "dragdialog" */ '../components/page/DragDialog.vue'),
-                meta: { title: '拖拽弹框' }
-            },
-            {
-                // 国际化组件
-                path: '/i18n',
-                component: () => import(/* webpackChunkName: "i18n" */ '../components/page/I18n.vue'),
-                meta: { title: '国际化' }
-            },
-            {
-                // 权限页面
-                path: '/permission',
-                component: () => import(/* webpackChunkName: "permission" */ '../components/page/Permission.vue'),
-                meta: { title: '权限测试', permission: true }
-            },
-            {
                 path: '/404',
                 component: () => import(/* webpackChunkName: "404" */ '../components/page/404.vue'),
                 meta: { title: '404' }
@@ -129,22 +95,12 @@ const routeMap = [
                 component: () => import(/* webpackChunkName: "403" */ '../components/page/403.vue'),
                 meta: { title: '403' }
             },
-            {
-                path: '/donate',
-                component: () => import(/* webpackChunkName: "donate" */ '../components/page/Donate.vue'),
-                meta: { title: '支持作者' }
-            }
         ]
     },
     {
         path: '/login',
         component: () => import(/* webpackChunkName: "login" */ '../components/page/Login.vue'),
         meta: { title: '登录' }
-    },
-    {
-        path: '/init',
-        component: () => import(/* webpackChunkName: "login" */ '../components/page/403.vue'),
-        meta: { title: '初始化' }
     },
     {
         path: '*',
