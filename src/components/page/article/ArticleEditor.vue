@@ -64,7 +64,7 @@
             </el-row>
 
             <el-button class="editor-btn" type="primary" @click="submit">发表文章</el-button>
-            <el-button class="editor-btn" type="secondary" @click="">保存草稿</el-button>
+            <el-button class="editor-btn" type="secondary" @click="saveDraft">保存草稿</el-button>
         </div>
 
     </div>
@@ -197,8 +197,11 @@
                         this.article.summary=''
                         this.article.title=''
                     }
-
                 })
+            },
+            saveDraft(){
+                this.article.status=1
+                this.submit()
             }
         }
     }
