@@ -106,7 +106,6 @@ export default {
         getData() {
             fetchCategories(this.query.pageIndex-1,this.query.pageSize).then(res => {
                 const data = res.data
-                this.tableData = []
                 this.tableData = data.content;
                 this.pageTotal = data.totalElements;
             });

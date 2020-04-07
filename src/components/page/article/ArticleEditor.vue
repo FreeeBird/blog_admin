@@ -8,43 +8,61 @@
         </div>
         <div class="container">
             <el-row :gutter="1">
-                <el-col :span="2">文章标题：</el-col>
-                <el-col :span="10">
-                    <el-input placeholder="请输入标题" v-model="article.title" ></el-input>
+                <el-col :span="12">
+                    <el-form ref="form" :model="article" label-width="80px">
+                        <el-form-item label="文章标题">
+                            <el-input  placeholder="请输入标题" v-model="article.title"></el-input>
+                        </el-form-item>
+                        <el-form-item label="文章分类">
+                            <el-select v-model="select_category" placeholder="请选择" @change="onCategoryChange" @blur="onCategoryChange">
+                                <el-option
+                                        v-for="(item,i) in categories"
+                                        :key="item.id"
+                                        :label="item.name"
+                                        :value="i">
+                                    <span style="float: left">{{ i }}  {{ item.name }}</span>
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                        <el-form-item label="文章类型">
+                            <el-radio-group v-model="article.type">
+                                <el-radio-button :label=0>富文本</el-radio-button>
+                                <el-radio-button :label=1>Markdown文本</el-radio-button>
+                            </el-radio-group>
+                        </el-form-item>
+                        <el-form-item label="文章摘要">
+                            <el-input type="textarea" :autosize="{ minRows: 3}" placeholder="请输入摘要" v-model="article.summary"></el-input>
+                        </el-form-item>
+                    </el-form>
                 </el-col>
-
+                <el-col :offset="2" :span="10">
+                    文章封面上传:
+                    <el-upload
+                            class="upload-demo"
+                            action="http://localhost:8888/blog/api/admin/upload/img"
+                            name="img"
+                            :on-preview="handlePictureCardPreview"
+                            :auto-upload="false"
+                            :file-list="fileList"
+                            :limit="1"
+                            ref="upload"
+                            :multiple="false"
+                            :on-success="onSuccess"
+                            list-type="picture-card">
+                        <el-button size="small" >选择图片</el-button>
+                    </el-upload>
+                    <el-button size="small"  type="primary" @click="onUpload">上传封面</el-button>
+                    <el-dialog :visible.sync="dialogVisible">
+                        <img width="100%" :src="dialogImageUrl" alt="">
+                    </el-dialog>
+                </el-col>
             </el-row>
-            <el-row>
-                文章类型：
-                <el-radio-group v-model="article.type">
-                    <el-radio-button :label=0>富文本</el-radio-button>
-                    <el-radio-button :label=1>Markdown文本</el-radio-button>
-                </el-radio-group>
-                文章分类：
-                <el-select v-model="select_category" placeholder="请选择" @change="onCategoryChange" @blur="onCategoryChange">
-                    <el-option
-                            v-for="(item,i) in categories"
-                            :key="item.id"
-                            :label="item.name"
-                            :value="i">
-                        <span style="float: left">{{ i }}  {{ item.name }}</span>
-                    </el-option>
-                </el-select>
-            </el-row>
-
-
             <el-row>
                 <quill-editor  v-if="article.type===0" ref="myTextEditor" v-model="article.content" :options="editorOption"></quill-editor>
 <!--                <div v-if="article.type===0" ref="editorElem" ></div>-->
                 <mavon-editor v-else v-model="article.content" ref="md" @imgAdd="$imgAdd" @change="change" placeholder="" style="min-height: 600px"/>
             </el-row>
 
-            <el-row>
-                <el-col :span="2">文章摘要：</el-col>
-                <el-col :span="22">
-                    <el-input type="textarea" :autosize="{ minRows: 3}" placeholder="请输入摘要" v-model="article.summary"></el-input>
-                </el-col>
-            </el-row>
             <el-button class="editor-btn" type="primary" @click="submit">发表文章</el-button>
             <el-button class="editor-btn" type="secondary" @click="">保存草稿</el-button>
         </div>
@@ -71,6 +89,10 @@
                 categories:[
                     { id: 0, name: "默认分类" },
                 ],
+                fileList:[],
+                dialogImageUrl: '',
+                dialogVisible: false,
+                disabled: false,
                 select_category: 0,
                 updateUrl: "http://localhost:8888/blog/api/admin/upload/img",
                 article:{
@@ -123,6 +145,20 @@
                     this.categories = re.content
                 })
             },
+            onUpload:function(res){
+                this.$refs.upload.submit();
+            },
+            onSuccess:function(res){
+                console.log(res)
+                this.article.thumbnailUrl = res.data
+            },
+            handleRemove(file) {
+                console.log(file);
+            },
+            handlePictureCardPreview(file) {
+                this.dialogImageUrl = file.url;
+                this.dialogVisible = true;
+            },
             onEditorChange({ editor, html, text }) {
                 this.content = html;
             },
@@ -130,6 +166,9 @@
                 const cate = this.categories[this.select_category]
                 this.article.categoryId = cate.id
                 this.article.category = cate.name
+            },
+            uploadImg(){
+
             },
             // 将图片上传到服务器，返回地址替换到md中
             $imgAdd(pos, $file){
