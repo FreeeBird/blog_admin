@@ -194,9 +194,6 @@ export default {
         Schart
     },
     computed: {
-        role() {
-            return this.name === 'admin' ? '超级管理员' : '普通用户';
-        }
     },
     // created() {
     //     this.handleListener();
@@ -214,9 +211,6 @@ export default {
     },
     methods: {
         fetchData(){
-            fetchTest(1).then(res => {
-                console.log(res.data)
-            })
         },
         changeDate() {
             const now = new Date().getTime();
