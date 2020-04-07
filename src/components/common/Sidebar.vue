@@ -107,11 +107,11 @@ export default {
                     index: 'blogger',
                     title: '博主信息',
                 },
-                {
-                    icon: 'el-icon-setting',
-                    index: 'setting',
-                    title: '设置',
-                },
+                // {
+                //     icon: 'el-icon-setting',
+                //     index: 'setting',
+                //     title: '设置',
+                // },
                 // {
                 //     icon: 'el-icon-lx-copy',
                 //     index: 'tabs',

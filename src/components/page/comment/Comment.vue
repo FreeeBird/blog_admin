@@ -21,12 +21,11 @@
                 :data="tableData"
                 border
                 class="table"
-                ref="multipleTable"
                 header-cell-class-name="table-header"
-                @selection-change="handleSelectionChange"
             >
-                <el-table-column type="selection" width="55" align="center"></el-table-column>
+<!--                <el-table-column type="selection" width="55" align="center"></el-table-column>-->
                 <el-table-column prop="id" label="ID" width="55" align="center"></el-table-column>
+                <el-table-column prop="articleTitle" label="文章"></el-table-column>
                 <el-table-column prop="nickname" label="昵称"></el-table-column>
                 <el-table-column prop="email" label="邮箱"></el-table-column>
                 <el-table-column prop="content" label="内容"></el-table-column>
@@ -64,17 +63,17 @@
         </div>
 
         <!-- 编辑弹出框 -->
-        <el-dialog title="编辑" :visible.sync="editVisible" width="30%">
-            <el-form ref="form" :model="form" label-width="70px">
-                <el-form-item label="分类名">
-                    <el-input v-model="form.name"></el-input>
-                </el-form-item>
-            </el-form>
-            <span slot="footer" class="dialog-footer">
-                <el-button @click="editVisible = false">取 消</el-button>
-                <el-button type="primary" @click="saveEdit">确 定</el-button>
-            </span>
-        </el-dialog>
+<!--        <el-dialog title="编辑" :visible.sync="editVisible" width="30%">-->
+<!--            <el-form ref="form" :model="form" label-width="70px">-->
+<!--                <el-form-item label="分类名">-->
+<!--                    <el-input v-model="form.name"></el-input>-->
+<!--                </el-form-item>-->
+<!--            </el-form>-->
+<!--            <span slot="footer" class="dialog-footer">-->
+<!--                <el-button @click="editVisible = false">取 消</el-button>-->
+<!--                <el-button type="primary" @click="saveEdit">确 定</el-button>-->
+<!--            </span>-->
+<!--        </el-dialog>-->
     </div>
 </template>
 

@@ -12,13 +12,23 @@
             <div>
                 <img src="https://lin-xin.gitee.io/images/weixin.jpg" />
             </div>
+            <div  id="art" class="art" v-html="content"></div>
         </div>
     </div>
 </template>
 
 <script>
-export default {};
+export default {
+    data(){
+        return{
+            content: '<h1><strong">regfdgfd</strong></h1>'
+        }
+    }
+};
 </script>
 
 <style>
+    #art > h1{
+        color: #2d8cf0;
+    }
 </style>
