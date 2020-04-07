@@ -51,7 +51,7 @@ export default {
                         const re = res;
                         if(re.code ===2000){
                             this.$message.success('登录成功');
-                            localStorage.setItem('ms_username', this.param.username);
+                            sessionStorage.setItem('username', this.param.username);
                             this.$router.push('/');
                         }else {
                             this.$message.error(re.message);

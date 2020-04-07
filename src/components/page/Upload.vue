@@ -30,7 +30,7 @@
                 访问地址：<a href="https://github.com/Agontuk/vue-cropperjs" target="_blank">vue-cropperjs</a>
             </div>
             <div class="crop-demo">
-                <img :src="cropImg" class="pre-img">
+                <el-image :src="cropImg" class="pre-img"></el-image>
                 <div class="crop-demo-btn">选择图片
                     <input class="crop-input" type="file" name="image" accept="image/*" @change="setImage"/>
                 </div>
