@@ -107,6 +107,7 @@ export default {
         fetchData(){
             fetchBlogger().then(res=>{
                 const data = res.data;
+                if(data==null) return;
                 this.form = data;
                 this.cropImg = this.form.portraitUrl;
             })

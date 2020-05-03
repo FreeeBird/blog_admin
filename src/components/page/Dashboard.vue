@@ -1,88 +1,99 @@
 <template>
     <div>
         <el-row :gutter="20">
-
-            <el-col :span="16">
+            <el-col :span="24">
                 <el-row :gutter="20" class="mgb20">
-                    <el-col :span="8">
+                    <el-col :span="6">
                         <el-card shadow="hover" :body-style="{padding: '0px'}">
                             <div class="grid-content grid-con-1">
                                 <i class="el-icon-lx-people grid-con-icon"></i>
                                 <div class="grid-cont-right">
-                                    <div class="grid-num">1234</div>
-                                    <div>用户访问量</div>
+                                    <div class="grid-num">{{statistics.dayVisit}}</div>
+                                    <div>今日访问量</div>
                                 </div>
                             </div>
                         </el-card>
                     </el-col>
-                    <el-col :span="8">
+                    <el-col :span="6">
                         <el-card shadow="hover" :body-style="{padding: '0px'}">
                             <div class="grid-content grid-con-2">
                                 <i class="el-icon-lx-notice grid-con-icon"></i>
                                 <div class="grid-cont-right">
-                                    <div class="grid-num">321</div>
-                                    <div>文章点击量</div>
+                                    <div class="grid-num">{{statistics.dayHits}}</div>
+                                    <div>今日文章点击量</div>
                                 </div>
                             </div>
                         </el-card>
                     </el-col>
-                    <el-col :span="8">
+                    <el-col :span="6">
+                        <el-card shadow="hover" :body-style="{padding: '0px'}">
+                            <div class="grid-content grid-con-1">
+                                <i class="el-icon-lx-people grid-con-icon"></i>
+                                <div class="grid-cont-right">
+                                    <div class="grid-num">{{statistics.visit}}</div>
+                                    <div>总访问量</div>
+                                </div>
+                            </div>
+                        </el-card>
+                    </el-col>
+                    <el-col :span="6">
+                        <el-card shadow="hover" :body-style="{padding: '0px'}">
+                            <div class="grid-content grid-con-2">
+                                <i class="el-icon-lx-notice grid-con-icon"></i>
+                                <div class="grid-cont-right">
+                                    <div class="grid-num">{{statistics.hits}}</div>
+                                    <div>总文章点击量</div>
+                                </div>
+                            </div>
+                        </el-card>
+                    </el-col>
+                </el-row>
+                <el-row :gutter="20" class="mgb20">
+                    <el-col :span="6">
+                        <el-card shadow="hover" :body-style="{padding: '0px'}">
+                            <div class="grid-content grid-con-1">
+                                <i class="el-icon-lx-people grid-con-icon"></i>
+                                <div class="grid-cont-right">
+                                    <div class="grid-num">{{statistics.categoryNum}}</div>
+                                    <div>分类数</div>
+                                </div>
+                            </div>
+                        </el-card>
+                    </el-col>
+                    <el-col :span="6">
+                        <el-card shadow="hover" :body-style="{padding: '0px'}">
+                            <div class="grid-content grid-con-2">
+                                <i class="el-icon-lx-notice grid-con-icon"></i>
+                                <div class="grid-cont-right">
+                                    <div class="grid-num">{{statistics.articleNum}}</div>
+                                    <div>文章数</div>
+                                </div>
+                            </div>
+                        </el-card>
+                    </el-col>
+                    <el-col :span="6">
                         <el-card shadow="hover" :body-style="{padding: '0px'}">
                             <div class="grid-content grid-con-3">
                                 <i class="el-icon-lx-goods grid-con-icon"></i>
                                 <div class="grid-cont-right">
-                                    <div class="grid-num">5000</div>
+                                    <div class="grid-num">{{statistics.commentNum}}</div>
+                                    <div>评论数</div>
+                                </div>
+                            </div>
+                        </el-card>
+                    </el-col>
+                    <el-col :span="6">
+                        <el-card shadow="hover" :body-style="{padding: '0px'}">
+                            <div class="grid-content grid-con-3">
+                                <i class="el-icon-lx-goods grid-con-icon"></i>
+                                <div class="grid-cont-right">
+                                    <div class="grid-num">{{statistics.messageNum}}</div>
                                     <div>留言量</div>
                                 </div>
                             </div>
                         </el-card>
                     </el-col>
                 </el-row>
-                <el-row :gutter="20" class="mgb20">
-                    <el-col :span="8">
-                        <el-card shadow="hover" :body-style="{padding: '0px'}">
-                            <div class="grid-content grid-con-1">
-                                <i class="el-icon-lx-people grid-con-icon"></i>
-                                <div class="grid-cont-right">
-                                    <div class="grid-num">1234</div>
-                                    <div>分类数</div>
-                                </div>
-                            </div>
-                        </el-card>
-                    </el-col>
-                    <el-col :span="8">
-                        <el-card shadow="hover" :body-style="{padding: '0px'}">
-                            <div class="grid-content grid-con-2">
-                                <i class="el-icon-lx-notice grid-con-icon"></i>
-                                <div class="grid-cont-right">
-                                    <div class="grid-num">321</div>
-                                    <div>文章数</div>
-                                </div>
-                            </div>
-                        </el-card>
-                    </el-col>
-                    <el-col :span="8">
-                        <el-card shadow="hover" :body-style="{padding: '0px'}">
-                            <div class="grid-content grid-con-3">
-                                <i class="el-icon-lx-goods grid-con-icon"></i>
-                                <div class="grid-cont-right">
-                                    <div class="grid-num">5000</div>
-                                    <div>评论数</div>
-                                </div>
-                            </div>
-                        </el-card>
-                    </el-col>
-                </el-row>
-            </el-col>
-            <el-col :span="8">
-                <el-card shadow="hover" style="height:252px;">
-                    <div slot="header" class="clearfix">
-                        <span>最新评论</span>
-                    </div>
-                    <div v-for="o in 4" :key="o" class="text item">
-                        {{'列表内容 ' + o }}
-                    </div>
-                </el-card>
             </el-col>
         </el-row>
         <el-row :gutter="20">
@@ -104,87 +115,59 @@
 import Schart from 'vue-schart';
 import bus from '../common/bus';
 import { fetchTest } from '../../api';
+import { fetchDaily, fetchMonthly, fetchStat, fetchWeekly } from '../../api/statistics';
+import moment from 'moment';
 export default {
     name: 'dashboard',
     data() {
         return {
             name: localStorage.getItem('ms_username'),
-            todoList: [
-                {
-                    title: '今天要修复100个bug',
-                    status: false
-                },
-            ],
-            data: [
-                {
-                    name: '2018/09/04',
-                    value: 1083
-                },
-                {
-                    name: '2018/09/05',
-                    value: 941
-                },
-                {
-                    name: '2018/09/06',
-                    value: 1139
-                },
-                {
-                    name: '2018/09/07',
-                    value: 816
-                },
-                {
-                    name: '2018/09/08',
-                    value: 327
-                },
-                {
-                    name: '2018/09/09',
-                    value: 228
-                },
-                {
-                    name: '2018/09/10',
-                    value: 1065
-                }
-            ],
+            statistics:{
+                articleNum: 0,
+                categoryNum: 0,
+                commentNum: 0,
+                createTime: null,
+                hits: 29,
+                id: null,
+                messageNum: 0,
+                visit: 0,
+                dayHits: 34,
+                dayVisit: 45
+            },
             options: {
                 type: 'bar',
                 title: {
-                    text: '最近一周各品类销售图'
+                    text: '最近一周的访问量'
                 },
-                xRorate: 25,
+                legend:{
+                    display: false
+                },
+                xRorate: 45,
                 labels: ['周一', '周二', '周三', '周四', '周五'],
                 datasets: [
                     {
-                        label: '家电',
-                        data: [234, 278, 270, 190, 230]
-                    },
-                    {
-                        label: '百货',
+                        label: '访问量',
                         data: [164, 178, 190, 135, 160]
                     },
-                    {
-                        label: '食品',
-                        data: [144, 198, 150, 235, 120]
-                    }
                 ]
             },
             options2: {
                 type: 'line',
                 title: {
-                    text: '最近几个月各品类销售趋势图'
+                    text: '最近一周的文章点击量'
                 },
-                labels: ['6月', '7月', '8月', '9月', '10月'],
+                bgColor: '#fbfbfb',
+                colorList:[
+                    '#ff7f00'
+                ],
+                legend: {
+                    display: false,
+                },
+                labels: ['周一', '周二', '周三', '周四', '周五'],
                 datasets: [
                     {
-                        label: '家电',
-                        data: [234, 278, 270, 190, 230]
-                    },
-                    {
-                        label: '百货',
-                        data: [164, 178, 150, 135, 160]
-                    },
-                    {
-                        label: '食品',
-                        data: [74, 118, 200, 235, 90]
+                        label: '点击量',
+                        data: [334, 278, 190, 235, 260, 200]
                     }
                 ]
             }
@@ -195,44 +178,61 @@ export default {
     },
     computed: {
     },
-    // created() {
-    //     this.handleListener();
-    //     this.changeDate();
-    // },
-    // activated() {
-    //     this.handleListener();
-    // },
-    // deactivated() {
-    //     window.removeEventListener('resize', this.renderChart);
-    //     bus.$off('collapse', this.handleBus);
-    // },
+    created() {
+        this.handleListener();
+    },
+    activated() {
+        this.handleListener();
+    },
+    deactivated() {
+        window.removeEventListener('resize', this.renderChart);
+        bus.$off('collapse', this.handleBus);
+    },
     created:function(){
         this.fetchData()
     },
     methods: {
         fetchData(){
+            fetchStat().then(res =>{
+                this.statistics = res.data
+            })
+            fetchDaily().then(res =>{
+
+            });
+            fetchWeekly().then(res =>{
+                var content = res.data.content;
+                this.options.labels=[];
+                this.options2.labels=[];
+                var labels = [];
+                this.options.datasets[0].data = []
+                this.options2.datasets[0].data = []
+                content.forEach((item,index)=>{
+                    labels.push(moment(item.createTime).format("MM月DD日"))
+                    this.options.datasets[0].data.push(item.visit)
+                    this.options2.datasets[0].data.push(item.hits)
+                    this.options.labels=labels;
+                    this.options2.labels=labels;
+                })
+            });
         },
         changeDate() {
-            const now = new Date().getTime();
-            this.data.forEach((item, index) => {
-                const date = new Date(now - (6 - index) * 86400000);
-                item.name = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
-            });
+
+        },
+        handleListener() {
+            bus.$on('collapse', this.handleBus);
+            // 调用renderChart方法对图表进行重新渲染
+            window.addEventListener('resize', this.renderChart);
+        },
+        handleBus(msg) {
+            setTimeout(() => {
+                console.log(msg)
+                this.renderChart();
+            }, 200);
+        },
+        renderChart() {
+            this.$refs.bar.renderChart();
+            this.$refs.line.renderChart();
         }
-        // handleListener() {
-        //     bus.$on('collapse', this.handleBus);
-        //     // 调用renderChart方法对图表进行重新渲染
-        //     window.addEventListener('resize', this.renderChart);
-        // },
-        // handleBus(msg) {
-        //     setTimeout(() => {
-        //         this.renderChart();
-        //     }, 200);
-        // },
-        // renderChart() {
-        //     this.$refs.bar.renderChart();
-        //     this.$refs.line.renderChart();
-        // }
     }
 };
 </script>

@@ -54,7 +54,7 @@ export default {
                             sessionStorage.setItem('username', this.param.username);
                             this.$router.push('/');
                         }else {
-                            this.$message.error(re.message);
+                            this.$message.error('登录失败');
                             return false;
                         }
                     })
