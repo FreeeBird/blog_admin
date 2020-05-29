@@ -48,3 +48,10 @@ export function putArticle(article){
         data: article
     })
 }
+
+export function delArticle(id) {
+    return request({
+        url: URL +'/'+id,
+        method: 'DELETE',
+    })
+}

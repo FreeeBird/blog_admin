@@ -78,7 +78,7 @@
 </template>
 
 <script>
-import { fetchArticles } from '../../../api/article';
+    import { delArticle, fetchArticles } from '../../../api/article';
 export default {
     name: 'articles',
     data() {
@@ -124,12 +124,16 @@ export default {
             // 二次确认删除
             this.$confirm('确定要删除吗？', '提示', {
                 type: 'warning'
-            })
-                .then(() => {
-                    this.$message.success('删除成功');
-                    this.tableData.splice(index, 1);
+            }).then(() => {
+                delArticle(row.id).then(res =>{
+                    if(res.code === 2000){
+                        this.$message.success('删除成功');
+                        this.tableData.splice(index, 1);
+                    }else this.$message.warning('删除错误');
                 })
-                .catch(() => {});
+                }).catch((err) => {
+                this.$message.error(err.toString());
+            });
         },
         // 编辑操作
         handleEdit(index, row) {

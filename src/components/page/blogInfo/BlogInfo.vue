@@ -22,20 +22,20 @@
                                 allow-create
                                 default-first-option
                                 placeholder="请输入关键词">
-                            <el-option
-                                    v-for="item in options"
-                                    :key="item.value"
-                                    :label="item.label"
-                                    :value="item.value">
-                            </el-option>
+<!--                            <el-option-->
+<!--                                    v-for="item in options"-->
+<!--                                    :key="item.value"-->
+<!--                                    :label="item.label"-->
+<!--                                    :value="item.value">-->
+<!--                            </el-option>-->
                         </el-select>
                     </el-form-item>
                     <el-form-item label="博客介绍">
                         <el-input :disabled="!isEdit" type="textarea" rows="5" v-model="form.description"></el-input>
                     </el-form-item>
-                    <el-form-item label="创建时间">
-                        <el-input disabled :value="form.createTime | dateFmt('YYYY-MM-DD HH:mm:SS')"></el-input>
-                    </el-form-item>
+<!--                    <el-form-item label="创建时间">-->
+<!--                        <el-input disabled :value="form.createTime | dateFmt('YYYY-MM-DD HH:mm:SS')"></el-input>-->
+<!--                    </el-form-item>-->
                     <el-form-item v-if="isEdit">
                         <el-button type="primary" @click="saveData">保存</el-button>
                         <el-button @click="cancelEdit">取消</el-button>
@@ -77,7 +77,8 @@ export default {
             fetchBlogInfo().then(res=>{
                 const data = res.data;
                 this.form = data;
-                this.value = data.keywords.split(' ')
+                this.options = data.keywords.split(' ')
+                this.value = this.options
             })
         },
         handleEdit(){
@@ -89,6 +90,7 @@ export default {
             this.isEdit = false
         },
         saveData(){
+            this.form.keywords = this.value.join(' ')
             saveBlogInfo(this.form).then(res =>{
                 const re = res
                 if(re.code===2000){

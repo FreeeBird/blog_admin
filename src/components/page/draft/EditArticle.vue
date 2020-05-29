@@ -39,7 +39,8 @@
                     文章封面上传:
                     <el-upload
                             class="upload-demo"
-                            action="http://localhost:8888/blog/api/admin/upload/img"
+                            action="http://localhost:8888/blog/api/upload/img"
+                            :with-credentials="true"
                             name="img"
                             :on-preview="handlePictureCardPreview"
                             :auto-upload="false"
@@ -95,7 +96,7 @@
                 dialogVisible: false,
                 disabled: false,
                 select_category: 0,
-                updateUrl: "http://localhost:8888/blog/api/admin/upload/img",
+                updateUrl: "http://localhost:8888/blog/api/upload/img",
                 article:{
                     createTime: null,
                     id: null,
@@ -115,7 +116,7 @@
                             loading: true,
                             name: 'img',
                             size: 3,
-                            action: 'http://localhost:8888/blog/api/admin/upload/img',
+                            action: 'http://localhost:8888/blog/api/upload/img',
                             response: (res) => {
                                 return res.data
                             }
@@ -183,8 +184,9 @@
                 formdata.append('img', $file);
                 // 这里没有服务器供大家尝试，可将下面上传接口替换为你自己的服务器接口
                 axios.request({
-                    url: 'http://localhost:8888/blog/api/admin/upload/img',
+                    url: 'http://localhost:8888/blog/api/upload/img',
                     method: 'post',
+                    withCredentials:true,
                     data: formdata,
                     headers: { 'Content-Type': 'multipart/form-data' },
                 }).then((res) => {

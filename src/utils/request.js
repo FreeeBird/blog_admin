@@ -1,6 +1,7 @@
 import axios from 'axios'
 import Qs from 'qs'
 import Vue from 'vue'
+import router from '../router';
 
 const BASE_API = 'http://localhost:8888/blog/api';
 // 创建axios实例
@@ -24,7 +25,12 @@ service.interceptors.response.use(
             Vue.prototype.$message.warning(res.statusText)
             return res;
         }
-        return res.data;
+        const data = res.data;
+        if(data.code===3300){
+            Vue.prototype.$message.error(data.message);
+            router.push('/login')
+        }
+        return data;
     },
     error => {
         Vue.prototype.$message.error('http_error:'+error)

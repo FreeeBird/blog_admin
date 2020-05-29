@@ -17,7 +17,7 @@
                     <el-col :span="6">
                         <el-card shadow="hover" :body-style="{padding: '0px'}">
                             <div class="grid-content grid-con-2">
-                                <i class="el-icon-lx-notice grid-con-icon"></i>
+                                <i class="el-icon-thumb grid-con-icon"></i>
                                 <div class="grid-cont-right">
                                     <div class="grid-num">{{statistics.dayHits}}</div>
                                     <div>今日文章点击量</div>
@@ -27,8 +27,8 @@
                     </el-col>
                     <el-col :span="6">
                         <el-card shadow="hover" :body-style="{padding: '0px'}">
-                            <div class="grid-content grid-con-1">
-                                <i class="el-icon-lx-people grid-con-icon"></i>
+                            <div class="grid-content grid-con-3">
+                                <i class="el-icon-s-custom grid-con-icon"></i>
                                 <div class="grid-cont-right">
                                     <div class="grid-num">{{statistics.visit}}</div>
                                     <div>总访问量</div>
@@ -38,8 +38,8 @@
                     </el-col>
                     <el-col :span="6">
                         <el-card shadow="hover" :body-style="{padding: '0px'}">
-                            <div class="grid-content grid-con-2">
-                                <i class="el-icon-lx-notice grid-con-icon"></i>
+                            <div class="grid-content grid-con-1">
+                                <i class="el-icon-s-promotion grid-con-icon"></i>
                                 <div class="grid-cont-right">
                                     <div class="grid-num">{{statistics.hits}}</div>
                                     <div>总文章点击量</div>
@@ -51,8 +51,8 @@
                 <el-row :gutter="20" class="mgb20">
                     <el-col :span="6">
                         <el-card shadow="hover" :body-style="{padding: '0px'}">
-                            <div class="grid-content grid-con-1">
-                                <i class="el-icon-lx-people grid-con-icon"></i>
+                            <div class="grid-content grid-con-2">
+                                <i class="el-icon-price-tag grid-con-icon"></i>
                                 <div class="grid-cont-right">
                                     <div class="grid-num">{{statistics.categoryNum}}</div>
                                     <div>分类数</div>
@@ -62,8 +62,8 @@
                     </el-col>
                     <el-col :span="6">
                         <el-card shadow="hover" :body-style="{padding: '0px'}">
-                            <div class="grid-content grid-con-2">
-                                <i class="el-icon-lx-notice grid-con-icon"></i>
+                            <div class="grid-content grid-con-3">
+                                <i class="el-icon-copy-document grid-con-icon"></i>
                                 <div class="grid-cont-right">
                                     <div class="grid-num">{{statistics.articleNum}}</div>
                                     <div>文章数</div>
@@ -73,8 +73,8 @@
                     </el-col>
                     <el-col :span="6">
                         <el-card shadow="hover" :body-style="{padding: '0px'}">
-                            <div class="grid-content grid-con-3">
-                                <i class="el-icon-lx-goods grid-con-icon"></i>
+                            <div class="grid-content grid-con-1">
+                                <i class="el-icon-chat-dot-square grid-con-icon"></i>
                                 <div class="grid-cont-right">
                                     <div class="grid-num">{{statistics.commentNum}}</div>
                                     <div>评论数</div>
@@ -84,8 +84,8 @@
                     </el-col>
                     <el-col :span="6">
                         <el-card shadow="hover" :body-style="{padding: '0px'}">
-                            <div class="grid-content grid-con-3">
-                                <i class="el-icon-lx-goods grid-con-icon"></i>
+                            <div class="grid-content grid-con-2">
+                                <i class="el-icon-message grid-con-icon"></i>
                                 <div class="grid-cont-right">
                                     <div class="grid-num">{{statistics.messageNum}}</div>
                                     <div>留言量</div>

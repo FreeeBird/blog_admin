@@ -24,11 +24,11 @@
                     <el-form-item label="Email">
                         {{ form.email }}
                     </el-form-item>
-                    <el-alert
-                            title="忘记账户密码时可用邮箱找回"
-                            type="success"
-                            :closable="false">
-                    </el-alert>
+<!--                    <el-alert-->
+<!--                            title="忘记账户密码时可用邮箱找回"-->
+<!--                            type="success"-->
+<!--                            :closable="false">-->
+<!--                    </el-alert>-->
                     <el-divider></el-divider>
                     <el-form-item label="头像">
                         <img v-if="!isEdit" :src="form.portraitUrl" class="pre-img">
@@ -137,8 +137,9 @@ export default {
                 const formData = new FormData();
                 formData.append('img',blob,'po'+blob.type.replace('image/','.'))
                 axios.request({
-                    url: 'http://localhost:8888/blog/api/admin/upload/img',
+                    url: 'http://localhost:8888/blog/api/upload/img',
                     method: 'post',
+                    withCredentials:true,
                     data: formData,
                     headers: { 'Content-Type': 'multipart/form-data' },
                 }).then((res) => {

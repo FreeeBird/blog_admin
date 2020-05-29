@@ -83,8 +83,8 @@ export default {
             if (command == 'loginout') {
                 userLogout().then(res =>{
                     if(res.code===2000){
-                        localStorage.removeItem('ms_username');
-                        this.$message.info("")
+                        sessionStorage.removeItem('username');
+                        this.$message.success("注销成功")
                         this.$router.push('/login');
                     }
                 })
